@@ -479,7 +479,7 @@ const renderCards = (board, countCards = 3) => {
 };
 
 const mainBlock = document.querySelector(`.main`);
-const renderHeader = () =>  {
+const renderHeader = () => {
   renderElement(document.querySelector(`.main__control`), createMenu());
   renderElement(mainBlock, createSearch());
   renderElement(mainBlock, createFilters());
@@ -493,7 +493,7 @@ const renderBoard = () => {
   renderElement(boardTasks, createEditTask());
   renderCards(boardTasks, COUNT_CARDS);
   renderElement(document.querySelector(`.board`), createButtonLoadMore());
-}
+};
 
 const renderPage = () => {
   renderHeader();
