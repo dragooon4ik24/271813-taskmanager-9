@@ -30,6 +30,7 @@ const createMenu = () => `
           >
         </section>
 `;
+
 const createSearch = () => `
       <section class="main__search search container">
         <input
@@ -111,6 +112,7 @@ const createFilters = () => `
         >
       </section>
 `;
+
 const createBoard = () => `
       <section class="board container">
         <div class="board__filter-list">
@@ -123,6 +125,7 @@ const createBoard = () => `
         </div>
       </section>
 `;
+
 const createCard = () => `
       <article class="card card--black">
             <div class="card__form">
@@ -190,6 +193,7 @@ const createCard = () => `
             </div>
           </article>
 `;
+
 const createEditTask = () => `
 <article class="card card--edit card--yellow card--repeat">
             <form class="card__form" method="get">
@@ -459,22 +463,42 @@ const createEditTask = () => `
             </form>
           </article>
 `;
+
 const createButtonLoadMore = () => `
   <button class="load-more" type="button">load more</button>
 `;
-const render = (container, insertedElement) => container.insertAdjacentHTML(`beforeend`, insertedElement);
+
+const COUNT_CARDS = 3;
+
+const renderElement = (container, insertedElement) => container.insertAdjacentHTML(`beforeend`, insertedElement);
+
+const renderCards = (board, countCards = 3) => {
+  for (let i = 0; i < countCards; i++) {
+    renderElement(board, createCard());
+  }
+};
+
 const mainBlock = document.querySelector(`.main`);
-render(document.querySelector(`.main__control`), createMenu());
-render(mainBlock, createSearch());
-render(mainBlock, createFilters());
-render(mainBlock, createBoard());
+const renderHeader = () =>  {
+  renderElement(document.querySelector(`.main__control`), createMenu());
+  renderElement(mainBlock, createSearch());
+  renderElement(mainBlock, createFilters());
+};
 
-const boardTasks = document.querySelector(`.board__tasks`);
-render(boardTasks, createEditTask());
+const renderBoard = () => {
+  renderElement(mainBlock, createBoard());
 
-for (let i = 0; i < 3; i++) {
-  render(boardTasks, createCard());
+  const boardTasks = document.querySelector(`.board__tasks`);
+
+  renderElement(boardTasks, createEditTask());
+  renderCards(boardTasks, COUNT_CARDS);
+  renderElement(document.querySelector(`.board`), createButtonLoadMore());
 }
 
-render(document.querySelector(`.board`), createButtonLoadMore());
+const renderPage = () => {
+  renderHeader();
+  renderBoard();
+};
+
+renderPage();
 
