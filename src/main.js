@@ -468,31 +468,31 @@ const createButtonLoadMore = () => `
   <button class="load-more" type="button">load more</button>
 `;
 
-const COUNT_CARDS = 3;
+const CARDS_COUNT = 3;
 
-const renderElement = (container, insertedElement) => container.insertAdjacentHTML(`beforeend`, insertedElement);
+const render = (container, insertedElement) => container.insertAdjacentHTML(`beforeend`, insertedElement);
 
 const renderCards = (board, countCards = 3) => {
   for (let i = 0; i < countCards; i++) {
-    renderElement(board, createCard());
+    render(board, createCard());
   }
 };
 
 const mainBlock = document.querySelector(`.main`);
 const renderHeader = () => {
-  renderElement(document.querySelector(`.main__control`), createMenu());
-  renderElement(mainBlock, createSearch());
-  renderElement(mainBlock, createFilters());
+  render(document.querySelector(`.main__control`), createMenu());
+  render(mainBlock, createSearch());
+  render(mainBlock, createFilters());
 };
 
 const renderBoard = () => {
-  renderElement(mainBlock, createBoard());
+  render(mainBlock, createBoard());
 
   const boardTasks = document.querySelector(`.board__tasks`);
 
-  renderElement(boardTasks, createEditTask());
-  renderCards(boardTasks, COUNT_CARDS);
-  renderElement(document.querySelector(`.board`), createButtonLoadMore());
+  render(boardTasks, createEditTask());
+  renderCards(boardTasks, CARDS_COUNT);
+  render(document.querySelector(`.board`), createButtonLoadMore());
 };
 
 const renderPage = () => {
