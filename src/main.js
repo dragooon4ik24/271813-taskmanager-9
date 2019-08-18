@@ -472,8 +472,8 @@ const CARDS_COUNT = 3;
 
 const render = (container, insertedElement) => container.insertAdjacentHTML(`beforeend`, insertedElement);
 
-const renderCards = (board, countCards = 3) => {
-  for (let i = 0; i < countCards; i++) {
+const renderCards = (board, cardsCount = 3) => {
+  for (let i = 0; i < cardsCount; i++) {
     render(board, createCard());
   }
 };
