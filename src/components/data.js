@@ -1,20 +1,14 @@
-const shuffle = (array) => {
-  const shuffledArray = array.slice();
-  let lengthArray = shuffledArray.length;
-  let i;
-  let temp;
+import {shuffle} from './utils.js';
 
-  while (lengthArray) {
-    i = Math.floor(Math.random() * lengthArray--);
-    temp = shuffledArray[lengthArray];
-    shuffledArray[lengthArray] = shuffledArray[i];
-    shuffledArray[i] = temp;
-  }
-
-  return shuffledArray;
+const Colors = {
+  BLACK: `black`,
+  YELLOW: `yellow`,
+  BLUE: `blue`,
+  GREEN: `green`,
+  PINK: `pink`
 };
 
-const generateData = () => {
+const generateTask = () => {
   const millisecondsInDay = 24 * 60 * 60 * 1000;
   return {
     description: [`Изучить теорию`,
@@ -39,19 +33,13 @@ const generateData = () => {
           `keks`
         ]).slice(0, Math.floor(Math.random() * 4))
     ),
-    color: [
-      `black`,
-      `yellow`,
-      `blue`,
-      `green`,
-      `pink`,
-    ][Math.floor(Math.random() * 5)],
+    color: Object.values(Colors)[Math.floor(Math.random() * 5)],
     isFavorite: Boolean(Math.round(Math.random())),
     isArchive: Boolean(Math.round(Math.random())),
   };
 };
 
-const generateFiltersData = (data) => {
+const generateFilters = (data) => {
   const millisecondsInDay = 24 * 60 * 60 * 1000;
   const now = Date.now();
   const today = new Date(now);
@@ -115,4 +103,4 @@ const generateFiltersData = (data) => {
       count: archiveCount
     }];
 };
-export {generateData, generateFiltersData};
+export {generateTask, generateFilters, Colors};

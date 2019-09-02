@@ -5,12 +5,12 @@ import {createBoard} from './components/board.js';
 import {createTask} from './components/task.js';
 import {createEditTask} from './components/task-edit.js';
 import {createLoadMoreButton} from './components/load-more-button.js';
-import {generateData, generateFiltersData} from './components/data.js';
+import {generateTask, generateFilters} from './components/data.js';
 
 const CARDS_COUNT = 25;
 const CARDS_COUNT_RENDERED_AT_TIME = 7;
 let countRenderedCard = 0;
-const dataArr = new Array(CARDS_COUNT).fill(``).map(() => generateData());
+const dataArr = new Array(CARDS_COUNT).fill(``).map(() => generateTask());
 
 const render = (container, insertedElement) => container.insertAdjacentHTML(`beforeend`, insertedElement);
 
@@ -23,7 +23,7 @@ let boardTasks;
 const renderHeader = () => {
   render(document.querySelector(`.main__control`), createMenu());
   render(mainBlock, createSearch());
-  render(mainBlock, createFilters(generateFiltersData(dataArr)));
+  render(mainBlock, createFilters(generateFilters(dataArr)));
 };
 
 const renderBoard = () => {
@@ -45,13 +45,13 @@ const renderPage = () => {
 renderPage();
 
 const loadMoreButton = document.querySelector(`.load-more`);
-const loadMoreButtonHandler = function () {
+const loadMoreButtonHandler = () => {
   if (CARDS_COUNT - countRenderedCard > CARDS_COUNT_RENDERED_AT_TIME) {
     renderCards(boardTasks, dataArr.slice(countRenderedCard, countRenderedCard += CARDS_COUNT_RENDERED_AT_TIME));
   } else {
     renderCards(boardTasks, dataArr.slice(countRenderedCard));
     countRenderedCard = CARDS_COUNT;
-    loadMoreButton.style.display = `none`;
+    loadMoreButton.classList.add(`load-more--deleted`);
   }
 };
 loadMoreButton.addEventListener(`click`, loadMoreButtonHandler);

@@ -1,3 +1,5 @@
+import {getMinutes} from './utils.js';
+
 export const createTask = ({description, dueDate, repeatingDays, tags, color, isFavorite, isArchive}) => `
       <article class="card card--${color} ${Object.keys(repeatingDays).some((day) => repeatingDays[day]) ? `
 card--repeat` : ``}">
@@ -34,7 +36,7 @@ card--repeat` : ``}">
                       <div class="card__date-deadline">
                         <p class="card__input-deadline-wrap">
                           <span class="card__date">${new Date(dueDate).toDateString()}</span>
-                          <span class="card__time">${new Date(dueDate).getHours()} : ${new Date(dueDate).getMinutes() > 9 ? new Date(dueDate).getMinutes() : `0${new Date(dueDate).getMinutes()}`}</span>
+                          <span class="card__time">${new Date(dueDate).getHours()} : ${getMinutes(dueDate)}</span>
                         </p>
                       </div>
                     </div>

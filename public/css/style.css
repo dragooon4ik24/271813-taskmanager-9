@@ -188,7 +188,9 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
   opacity: 0.8;
 }
-
+.load-more--deleted {
+  display: none;
+}
 .card {
   position: relative;
   width: 210px;

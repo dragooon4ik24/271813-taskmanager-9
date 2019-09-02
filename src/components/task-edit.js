@@ -1,3 +1,5 @@
+import {Colors} from './data.js';
+
 export const createEditTask = ({description, dueDate, repeatingDays, tags, color, isFavorite, isArchive}) => `
 <article class="card card--edit card--${color} ${Object.keys(repeatingDays).some((day) => repeatingDays[day]) ? `
 card--repeat` : ``}">
@@ -176,7 +178,7 @@ yes` : `no`}</span>
                         class="card__color-input card__color-input--black visually-hidden"
                         name="color"
                         value="black"
-                        ${color === `black` ? `checked` : ``}
+                        ${color === Colors.BLACK ? `checked` : ``}
                       />
                       <label
                         for="color-black-4"
@@ -189,7 +191,7 @@ yes` : `no`}</span>
                         class="card__color-input card__color-input--yellow visually-hidden"
                         name="color"
                         value="yellow"
-                        ${color === `yellow` ? `checked` : ``}
+                        ${color === Colors.YELLOW ? `checked` : ``}
                       />
                       <label
                         for="color-yellow-4"
@@ -202,7 +204,7 @@ yes` : `no`}</span>
                         class="card__color-input card__color-input--blue visually-hidden"
                         name="color"
                         value="blue"
-                        ${color === `blue` ? `checked` : ``}
+                        ${color === Colors.BLUE ? `checked` : ``}
                       />
                       <label
                         for="color-blue-4"
@@ -215,7 +217,7 @@ yes` : `no`}</span>
                         class="card__color-input card__color-input--green visually-hidden"
                         name="color"
                         value="green"
-                        ${color === `green` ? `checked` : ``}
+                        ${color === Colors.GREEN ? `checked` : ``}
                       />
                       <label
                         for="color-green-4"
@@ -228,7 +230,7 @@ yes` : `no`}</span>
                         class="card__color-input card__color-input--pink visually-hidden"
                         name="color"
                         value="pink"
-                        ${color === `pink` ? `checked` : ``}
+                        ${color === Colors.PINK ? `checked` : ``}
                       />
                       <label
                         for="color-pink-4"
