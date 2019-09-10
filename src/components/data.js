@@ -39,7 +39,7 @@ const generateTask = () => {
   };
 };
 
-const generateFilters = (data) => {
+const generateFilters = (dataArr) => {
   const millisecondsInDay = 24 * 60 * 60 * 1000;
   const now = Date.now();
   const today = new Date(now);
@@ -52,7 +52,7 @@ const generateFilters = (data) => {
   let todayCount = 0;
   let setAllTags = new Set();
 
-  data.forEach((el) => {
+  dataArr.forEach((el) => {
     const countElapsedMillisecondsToday = el.dueDate - startToday;
 
     if (now > el.dueDate) {
@@ -76,7 +76,7 @@ const generateFilters = (data) => {
   return [
     {
       title: `all`,
-      count: data.length
+      count: dataArr.length
     },
     {
       title: `overdue`,
