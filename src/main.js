@@ -5,11 +5,12 @@ import Board from './components/board.js';
 import Task from './components/task.js';
 import TaskEdit from './components/task-edit.js';
 import LoadMoreButton from './components/load-more-button.js';
+import NoTasks from './components/no-tasks.js'
 import {generateTask, generateFilters} from './components/data.js';
 import {Position, render, unrender} from "./components/utils.js";
 
 const CARDS_COUNT = 25;
-const CARDS_COUNT_RENDERED_AT_TIME = 7;
+const CARDS_COUNT_RENDERED_AT_TIME = 2;
 let countRenderedCard = 0;
 let tasksContainer;
 
@@ -62,13 +63,18 @@ const renderTask = (taskMock) => {
       taskEdit.removeElement();
       task.removeElement();
       document.removeEventListener(`keydown`, onEscKeyDown);
+
+      if(!--countRenderedCard) {
+        unrender(board);
+        renderNoTasks();
+      }
     });
 
   render(tasksContainer, task.getElement(), Position.BEFOREEND);
 };
 const renderBoard = () => {
   const board = new Board();
-  render(mainBlock, board.getElement(), `beforeend`);
+  render(main, board.getElement(), `beforeend`);
 };
 const renderMenu = () => {
   const menu = new Menu();
@@ -76,15 +82,15 @@ const renderMenu = () => {
 };
 const renderSearch = () => {
   const search = new Search();
-  render(mainBlock, search.getElement(), `beforeend`);
+  render(main, search.getElement(), `beforeend`);
 };
 const renderFilters = () => {
   const filters = new Filters(generateFilters(taskMocks));
-  render(mainBlock, filters.getElement(), `beforeend`);
+  render(main, filters.getElement(), `beforeend`);
 };
 const renderLoadMoreButton = () => {
   const loadMoreButton = new LoadMoreButton();
-  render(document.querySelector(`.board`), loadMoreButton.getElement(), `beforeend`);
+  render(board, loadMoreButton.getElement(), `beforeend`);
 
   loadMoreButton.getElement()
     .addEventListener(`click`, () => {
@@ -97,11 +103,15 @@ const renderLoadMoreButton = () => {
       }
     });
 };
+const renderNoTasks = () => {
+  const noTasks = new NoTasks();
+  render(main, noTasks.getElement(), `beforeend`);
+};
 
 const taskMocks = new Array(CARDS_COUNT).fill(``).map(generateTask);
 
-const mainBlock = document.querySelector(`.main`);
-
+const main = document.querySelector(`.main`);
+let board;
 const renderHeader = () => {
   renderMenu();
   renderSearch();
@@ -110,10 +120,10 @@ const renderHeader = () => {
 
 const renderBody = () => {
   renderBoard();
-
+  board = document.querySelector(`.board`);
   tasksContainer = document.querySelector(`.board__tasks`);
 
-  taskMocks.slice(countRenderedCard, countRenderedCard += 7).forEach((taskMock) => renderTask(taskMock));
+  taskMocks.slice(countRenderedCard, countRenderedCard += CARDS_COUNT_RENDERED_AT_TIME).forEach((taskMock) => renderTask(taskMock));
   renderLoadMoreButton();
 };
 
